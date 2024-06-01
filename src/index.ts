@@ -44,14 +44,98 @@ function htmlTemplate(): string {
 	return `
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Substitute Stack</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SubstituteStack - make substack links work everywhere</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+			max-width: 768px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		#urlInput {
+			width: 100%;
+			padding: 10px;
+			font-size: 18px;
+			margin-top: 20px;
+			box-sizing: border-box;
+		}
+
+		.output {
+			margin-top: 20px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			cursor: pointer;
+			background-color: #f9f9f9;
+			word-wrap: break-word;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.message {
+			margin-top: 10px;
+			color: green;
+			display: none;
+		}
+	</style>
 </head>
+
 <body>
-  <h1>Hello from Substitute stack</h1>
+
+	<h1>SubstituteStack</h1>
+	<p>Make substack links work on Twitter</p>
+	<input type="text" id="urlInput" placeholder="Enter a substack.com URL">
+	<div id="output" class="output hidden"></div>
+	<div id="message" class="message">Copied to clipboard</div>
+
+	<script>
+		let timeout;
+
+		document.getElementById('urlInput').addEventListener('input', function () {
+			const input = this.value;
+			const outputDiv = document.getElementById('output');
+			const messageDiv = document.getElementById('message');
+
+			if (input.includes('substack.com')) {
+				const transformedUrl = input.replace('substack.com', 'substitutestack.com');
+				outputDiv.textContent = transformedUrl;
+				outputDiv.classList.remove('hidden');
+			} else {
+				outputDiv.classList.add('hidden');
+			}
+			messageDiv.style.display = 'none';
+			clearTimeout(timeout);
+		});
+
+		document.getElementById('output').addEventListener('click', function () {
+			const range = document.createRange();
+			range.selectNode(this);
+			window.getSelection().removeAllRanges();
+			window.getSelection().addRange(range);
+
+			try {
+				document.execCommand('copy');
+				const messageDiv = document.getElementById('message');
+				messageDiv.style.display = 'block';
+				clearTimeout(timeout);
+				timeout = setTimeout(() => {
+					messageDiv.style.display = 'none';
+				}, 3000);
+			} catch (err) {
+				console.error('Failed to copy text: ', err);
+			}
+		});
+	</script>
+
 </body>
+
 </html>
   `;
 }
