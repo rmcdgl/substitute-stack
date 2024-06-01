@@ -51,7 +51,7 @@ function htmlTemplate(): string {
 	<title>SubstituteStack - make substack links work everywhere</title>
 	<style>
 		body {
-			font-family: Arial, sans-serif;
+			font-family: sans-serif;
 			padding: 20px;
 			max-width: 768px;
 			margin: 0 auto;
@@ -85,13 +85,21 @@ function htmlTemplate(): string {
 			display: none;
 		}
 	</style>
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="SubstituteStack - Make Substack Links Work Everywhere">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://substitutestack.com">
+	<!-- <meta property="og:image" content="https://substitutestack.com/og.jpeg"> -->
+	<meta property="og:description" content="Transform substack links to show rich previews on Twitter/X">
+	<meta property="og:site_name" content="SubstituteStack">
 </head>
 
 <body>
 
 	<h1>SubstituteStack</h1>
-	<p>Make substack links work on Twitter</p>
-	<input type="text" id="urlInput" placeholder="Enter a substack.com URL">
+	<p>Make substack links work properly on Twitter/X</p>
+	<input type="text" id="urlInput" placeholder="Enter a substack.com link">
 	<div id="output" class="output hidden"></div>
 	<div id="message" class="message">Copied to clipboard</div>
 
