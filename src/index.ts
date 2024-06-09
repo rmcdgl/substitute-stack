@@ -56,6 +56,8 @@ function htmlTemplate(): string {
 			max-width: 768px;
 			margin: 0 auto;
 			text-align: center;
+			background-color: #fff;
+			color: #000;
 		}
 
 		#urlInput {
@@ -64,6 +66,8 @@ function htmlTemplate(): string {
 			font-size: 18px;
 			margin-top: 20px;
 			box-sizing: border-box;
+			background-color: #fff;
+			color: #000;
 		}
 
 		.output {
@@ -73,6 +77,7 @@ function htmlTemplate(): string {
 			cursor: pointer;
 			background-color: #f9f9f9;
 			word-wrap: break-word;
+			color: #000;
 		}
 
 		.hidden {
@@ -83,6 +88,29 @@ function htmlTemplate(): string {
 			margin-top: 10px;
 			color: green;
 			display: none;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			body {
+				background-color: #121212;
+				color: #ffffff;
+			}
+
+			#urlInput {
+				background-color: #333;
+				color: #ffffff;
+				border: 1px solid #555;
+			}
+
+			.output {
+				background-color: #333;
+				border: 1px solid #555;
+				color: #ffffff;
+			}
+
+			.message {
+				color: #00ff00;
+			}
 		}
 	</style>
 
@@ -145,7 +173,7 @@ function htmlTemplate(): string {
 </body>
 
 </html>
-  `;
+`;
 }
 
 function htmlTemplateWithHead(headContent: string): string {
