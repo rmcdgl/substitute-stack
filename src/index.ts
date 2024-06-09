@@ -1,3 +1,5 @@
+import { OG_IMAGE } from './og-image';
+
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		return handleRequest(request);
@@ -12,6 +14,15 @@ async function handleRequest(request: Request): Promise<Response> {
 	if (url.pathname === '/' && url.hostname === DEPLOYMENT_URL) {
 		return new Response(htmlTemplate(), {
 			headers: { 'Content-Type': 'text/html' },
+		});
+	} else if (url.pathname === '/og.png' && url.hostname === DEPLOYMENT_URL) {
+		// Serve the image
+		const imageBuffer = Uint8Array.from(atob(OG_IMAGE), (c) => c.charCodeAt(0));
+
+		return new Response(imageBuffer, {
+			headers: {
+				'Content-Type': 'image/png',
+			},
 		});
 	} else {
 		// replace substitutestack.com with substack.com
@@ -118,7 +129,7 @@ function htmlTemplate(): string {
 	<meta property="og:title" content="SubstituteStack - Make Substack Links Work Everywhere">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://substitutestack.com">
-	<!-- <meta property="og:image" content="https://substitutestack.com/og.jpeg"> -->
+	<meta property="og:image" content="https://substitutestack.com/og.png">
 	<meta property="og:description" content="Transform substack links to show rich previews on Twitter/X">
 	<meta property="og:site_name" content="SubstituteStack">
 </head>
